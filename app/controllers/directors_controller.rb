@@ -68,7 +68,7 @@ class DirectorsController < ApplicationController
       director.name = params.fetch("name", director.name)
       director.dob = params.fetch("dob", director.dob)
       director.bio = params.fetch("bio", director.bio)
-      director.image = params.fetch("image", director.image)
+      director.image = params.fetch("query_image", director.image)
   
       if director.save
         redirect_to("/directors/#{director.id}") # Redirects to show page after update

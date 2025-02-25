@@ -32,10 +32,10 @@ class ActorsController < ApplicationController
     actor = Actor.find_by(id: the_id)
   
     if actor.present?
-      actor.name = params.fetch("name", actor.name)
-      actor.dob = params.fetch("dob", actor.dob)
-      actor.bio = params.fetch("bio", actor.bio)
-      actor.image = params.fetch("image", actor.image)
+      actor.name = params.fetch("query_name", actor.name)
+      actor.dob = params.fetch("query_dob", actor.dob)
+      actor.bio = params.fetch("query_bio", actor.bio)
+      actor.image = params.fetch("query_image", actor.image)
   
       if actor.save
         redirect_to("/actors/#{actor.id}") # Redirect to show page after update
