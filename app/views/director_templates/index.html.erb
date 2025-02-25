@@ -1,54 +1,64 @@
-<h1>
-  List of all directors
-</h1>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Directors List</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+  </head>
 
-<hr>
+  <body>
+    <nav>
+      <a href="/">Home</a>
+    </nav>
 
-<table border="1">
-  <tr>
-    <th>
-      ID
-    </th>
+    <h1>List of all directors</h1>
 
-    <th>
-      Image
-    </th>
+    <hr>
 
-    <th>
-      Name
-    </th>
+    <form action="/insert_director" method="post">
+      <div>
+        <label for="name_box">Name</label>
+        <input type="text" id="name_box" name="query_name">
+      </div>
 
-    <th>
-      Dob
-    </th>
+      <div>
+        <label for="dob_box">Date of Birth</label>
+        <input type="text" id="dob_box" name="query_dob">
+      </div>
 
-    <th>
-    </th>
-  </tr>
+      <div>
+        <label for="bio_box">Bio</label>
+        <textarea id="bio_box" name="query_bio" rows="3"></textarea>
+      </div>
 
-  <% @list_of_directors.order({:dob => :desc}).each do |director| %>
-  <tr>
-    <td>
-      <%= director.id %>
-    </td>
+      <div>
+        <label for="image_box">Image</label>
+        <input type="text" id="image_box" name="query_image">
+      </div>
 
-    <td>
-      <img src="<%= director.image %>" style="width:250px;">
-    </td>
+      <button>Create director</button>
+    </form>
 
-    <td>
-      <%= director.name %>
-    </td>
+    <hr>
 
-    <td>
-      <%= director.dob %>
-    </td>
+    <table border="1">
+      <tr>
+        <th>ID</th>
+        <th>Image</th>
+        <th>Name</th>
+        <th>Dob</th>
+        <th></th>
+      </tr>
 
-    <td>
-      <a href="/directors/<%= director.id %>">
-        Show details
-      </a>
-    </td>
-  </tr>
-  <% end %>
-</table>
+      <% @list_of_directors.each do |a_director| %>
+        <tr>
+          <td><%= a_director.id %></td>
+          <td><img src="<%= a_director.image %>" style="width:250px;"></td>
+          <td><%= a_director.name %></td>
+          <td><%= a_director.dob %></td>
+          <td><a href="/directors/<%= a_director.id %>">Show details</a></td>
+        </tr>
+      <% end %>
+    </table>
+  </body>
+</html>

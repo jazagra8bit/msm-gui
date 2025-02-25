@@ -2,74 +2,89 @@
   Movie #<%= @the_movie.id %> details
 </h1>
 
-<a href="/movies">
-  Go back
-</a>
+<div>
+  <a href="/movies">Go back</a>
+</div>
+
+<div>
+  <a href="/delete_movie/<%= @the_movie.id %>" onclick="return confirm('Are you sure?')">
+    Delete movie
+  </a>
+</div>
+
+<hr>
+
+<form action="/update_movie/<%= @the_movie.id %>" method="post">
+  <div>
+    <label for="title_box">Title</label>
+    <input type="text" id="title_box" name="query_title" value="<%= @the_movie.title %>">
+  </div>
+
+  <div>
+    <label for="year_box">Year</label>
+    <input type="number" id="year_box" name="query_year" value="<%= @the_movie.year %>">
+  </div>
+
+  <div>
+    <label for="duration_box">Duration</label>
+    <input type="number" id="duration_box" name="query_duration" value="<%= @the_movie.duration %>">
+  </div>
+
+  <div>
+    <label for="description_box">Description</label>
+    <textarea id="description_box" name="query_description" rows="3"><%= @the_movie.description %></textarea>
+  </div>
+
+  <div>
+    <label for="image_box">Image</label>
+    <input type="text" id="image_box" name="query_image" value="<%= @the_movie.image %>">
+  </div>
+
+  <div>
+    <label for="director_box">Director</label>
+    <select id="director_box" name="query_director_id">
+      <% Director.all.each do |dir| %>
+        <option value="<%= dir.id %>" <% if @the_movie.director_id == dir.id %>selected<% end %>>
+          <%= dir.name %>
+        </option>
+      <% end %>
+    </select>
+  </div>
+
+  <button>Update movie</button>
+</form>
 
 <hr>
 
 <dl>
-  <dt>
-    Title
-  </dt>
+  <dt>Title</dt>
+  <dd><%= @the_movie.title %></dd>
+
+  <dt>Year</dt>
+  <dd><%= @the_movie.year %></dd>
+
+  <dt>Duration</dt>
+  <dd><%= @the_movie.duration %> minutes</dd>
+
+  <dt>Description</dt>
+  <dd><%= @the_movie.description %></dd>
+
+  <dt>Image</dt>
+  <dd><img src="<%= @the_movie.image %>" style="width:250px;"></dd>
+
+  <dt>Director</dt>
   <dd>
-    <%= @the_movie.title %>
+    <% dir = Director.find_by(id: @the_movie.director_id) %>
+    <% if dir.nil? %>
+      No director assigned.
+    <% else %>
+      <a href="/directors/<%= dir.id %>"><%= dir.name %></a>
+    <% end %>
   </dd>
 
-  <dt>
-    Year
-  </dt>
-  <dd>
-    <%= @the_movie.year %>
-  </dd>
+  <dt>Created at</dt>
+  <dd><%= @the_movie.created_at %></dd>
 
-  <dt>
-    Duration
-  </dt>
-  <dd>
-    <%= @the_movie.duration %>
-  </dd>
-
-  <dt>
-    Description
-  </dt>
-  <dd>
-    <%= @the_movie.description %>
-  </dd>
-
-  <dt>
-    Image
-  </dt>
-  <dd>
-    <img src="<%= @the_movie.image %>" style="width:250px;">
-  </dd>
-
-  <dt>
-    Director
-  </dt>
-  <dd>
-    <% dir_id = @the_movie.director_id %>
-    
-    <% matching_directors = Director.where({ :id => dir_id }) %>
-    
-    <% the_director = matching_directors.at(0) %>
-
-    <%= the_director.name %>
-  </dd>
-
-  <dt>
-    Created at
-  </dt>
-  <dd>
-    <%= @the_movie.created_at %>
-  </dd>
-
-  <dt>
-    Updated at
-  </dt>
-  <dd>
-    <%= @the_movie.updated_at %>
-  </dd>
+  <dt>Updated at</dt>
+  <dd><%= @the_movie.updated_at %></dd>
 </dl>
-
-<hr>

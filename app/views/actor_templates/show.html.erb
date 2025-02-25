@@ -2,57 +2,69 @@
   Actor #<%= @the_actor.id %> details
 </h1>
 
-<a href="/actors">
-  Go back
-</a>
+<a href="/actors">Go back</a>
 
 <hr>
 
 <dl>
-  <dt>
-    Name
-  </dt>
-  <dd>
-    <%= @the_actor.name %>
-  </dd>
+  <dt>Name</dt>
+  <dd><%= @the_actor.name %></dd>
 
-  <dt>
-    Dob
-  </dt>
-  <dd>
-    <%= @the_actor.dob %>
-  </dd>
+  <dt>Dob</dt>
+  <dd><%= @the_actor.dob %></dd>
 
-  <dt>
-    Bio
-  </dt>
-  <dd>
-    <%= @the_actor.bio %>
-  </dd>
+  <dt>Bio</dt>
+  <dd><%= @the_actor.bio %></dd>
 
-  <dt>
-    Image
-  </dt>
+  <dt>Image</dt>
   <dd>
     <img src="<%= @the_actor.image %>" style="width:250px;">
   </dd>
 
-  <dt>
-    Created at
-  </dt>
-  <dd>
-    <%= @the_actor.created_at %>
-  </dd>
+  <dt>Created at</dt>
+  <dd><%= @the_actor.created_at %></dd>
 
-  <dt>
-    Updated at
-  </dt>
-  <dd>
-    <%= @the_actor.updated_at %>
-  </dd>
+  <dt>Updated at</dt>
+  <dd><%= @the_actor.updated_at %></dd>
 </dl>
 
 <hr>
+
+<h2>Update Actor</h2>
+
+<form action="/update_actor/<%= @the_actor.id %>" method="post">
+  <div>
+    <label>Name</label>
+    <input type="text" name="name" value="<%= @the_actor.name %>">
+  </div>
+
+  <div>
+    <label>Dob</label>
+    <input type="date" name="dob" value="<%= @the_actor.dob %>">
+  </div>
+
+  <div>
+    <label>Bio</label>
+    <textarea name="bio"><%= @the_actor.bio %></textarea>
+  </div>
+
+  <div>
+    <label for="image_box">
+      Image
+    </label>
+    <input type="text" id="image_box" name="query_image" value="<%= @the_actor.image %>">
+  </div>
+
+  <button>
+    Update actor
+  </button>
+</form>
+
+<hr>
+
+<form action="/delete_actor/<%= @the_actor.id %>" method="get" style="display:inline;">
+  <button type="submit" onclick="return confirm('Are you sure?')">Delete Actor</button>
+</form>
 
 <h2>Filmography</h2>
 

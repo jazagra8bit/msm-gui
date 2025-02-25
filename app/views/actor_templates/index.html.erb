@@ -1,54 +1,64 @@
-<h1>
-  List of all actors
-</h1>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Actors List</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+  </head>
 
-<hr>
+  <body>
+    <nav>
+      <a href="/">Home</a>
+    </nav>
 
-<table border="1">
-  <tr>
-    <th>
-      ID
-    </th>
+    <h1>List of all actors</h1>
 
-    <th>
-      Image
-    </th>
+    <hr>
 
-    <th>
-      Name
-    </th>
+    <form action="/insert_actor" method="post">
+      <div>
+        <label for="name_box">Name</label>
+        <input type="text" id="name_box" name="query_name">
+      </div>
 
-    <th>
-      Dob
-    </th>
+      <div>
+        <label for="dob_box">Date of Birth</label>
+        <input type="text" id="dob_box" name="query_dob">
+      </div>
 
-    <th>
-    </th>
-  </tr>
+      <div>
+        <label for="bio_box">Bio</label>
+        <textarea id="bio_box" name="query_bio" rows="3"></textarea>
+      </div>
 
-  <% @list_of_actors.each do |an_actor| %>
-  <tr>
-    <td>
-      <%= an_actor.id %>
-    </td>
+      <div>
+        <label for="image_box">Image</label>
+        <input type="text" id="image_box" name="query_image">
+      </div>
 
-    <td>
-      <img src="<%= an_actor.image %>" style="width:250px;">
-    </td>
+      <button>Create actor</button>
+    </form>
 
-    <td>
-      <%= an_actor.name %>
-    </td>
+    <hr>
 
-    <td>
-      <%= an_actor.dob %>
-    </td>
+    <table border="1">
+      <tr>
+        <th>ID</th>
+        <th>Image</th>
+        <th>Name</th>
+        <th>Dob</th>
+        <th></th>
+      </tr>
 
-    <td>
-      <a href="/actors/<%= an_actor.id %>">
-        Show details
-      </a>
-    </td>
-  </tr>
-  <% end %>
-</table>
+      <% @list_of_actors.each do |an_actor| %>
+        <tr>
+          <td><%= an_actor.id %></td>
+          <td><img src="<%= an_actor.image %>" style="width:250px;"></td>
+          <td><%= an_actor.name %></td>
+          <td><%= an_actor.dob %></td>
+          <td><a href="/actors/<%= an_actor.id %>">Show details</a></td>
+        </tr>
+      <% end %>
+    </table>
+  </body>
+</html>
